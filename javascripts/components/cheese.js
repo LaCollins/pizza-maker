@@ -8,12 +8,26 @@ const cheeses = [
     {id: 'cheese5', name: 'Feta', price: 80 }
 ];
 
+const getSelectedCheeses = () => {
+    const selectedCheeses = [];
+    const cheeseCheckBoxes = document.getElementsByClassName('cheese');
+    
+    for (let j = 0; j < cheeseCheckBoxes.length; j++) {
+        for (let k = 0; k < cheeses.length; k++) {
+            if (cheeseCheckBoxes[j].checked && cheeseCheckBoxes[j].id === cheeses[k].id) {
+                selectedCheeses.push(cheeses[k]);
+            }
+        }
+    }
+    return selectedCheeses;
+}
+
 const printCheeseOptions = () => {
     let domString = '';
     for (let i = 0; i < cheeses.length; i++) {
     domString += `
     <div class="custom-control custom-switch">
-        <input type="checkbox" class="custom-control-input" id="${cheeses[i].id}">
+        <input type="checkbox" class="custom-control-input cheese" id="${cheeses[i].id}">
         <label class="custom-control-label" for="${cheeses[i].id}">${cheeses[i].name}</label>
     </div>
     `;
@@ -23,4 +37,4 @@ const printCheeseOptions = () => {
     
 };
 
-export default { printCheeseOptions };
+export default { printCheeseOptions, getSelectedCheeses };
